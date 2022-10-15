@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo</title>
+        <link rel="stylesheet" href="{% static 'detail/styles.css' %}">
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="header">
+                <a href=" {% url 'home' %} "><img src="{% static 'img/arrow.png' %}" alt="" class="arrow"></a>
+                <h1>{{header}}</h1>
+            </div>
+
+            <div class="main">
+                {% for x in my_lists %}
+                <div class="items">
+                    <span> {{x}} </span>
+                    <div class="buttons">
+                        <a href=" {% url 'update' x.id %} "><button class="update">Update</button></a>
+                        <a href="{% url 'deleteitem' x.id %}"><button class="del">Delete</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+            <div class="form">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form}}
+                    <input type="submit" class="btn">
+                </form>
+            </div>
+
+
+        </div>
+    </body>
+</html>
